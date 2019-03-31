@@ -1,0 +1,76 @@
+.overlay {
+  height: 100%;
+  width: 15%;
+  background: rgba(255,255,255,0.5);
+  border-radius: 10px;
+  border: solid blue 0.05rem;
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather {
+  margin-left: auto;
+  margin-right: auto;
+  height: 50%;
+  width: 100%;
+}
+
+.description {
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  font-size: 0.8em;
+}
+
+.temperature, .hour {
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.clearMorning {
+  background: url('../../icons/clear-morning.png') top left/cover no-repeat;
+}
+
+.clearNight {
+  background: url('../../icons/clear-night.png') top left/cover no-repeat;
+}
+
+.partialCloudsMorning {
+  background: url('../../icons/partialclouds-morning.png') top left/cover no-repeat;
+}
+
+.partialCloudsNight {
+  background: url('../../icons/partialclouds-night.png') top left/cover no-repeat;
+}
+
+.cloudy {
+  background: url('../../icons/cloudy.png') top left/cover no-repeat;
+}
+
+.showers {
+  background: url('../../icons/showers.png') top left/cover no-repeat;
+}
+
+.rainMorning {
+  background: url('../../icons/rain-morning.png') top left/cover no-repeat;
+}
+
+.rainNight {
+  background: url('../../icons/rain-night.png') top left/cover no-repeat;
+}
+
+.thunderstorm {
+  background: url('../../icons/thunderstorms.png') top left/cover no-repeat;
+}
+
+.snowy {
+  background: url('../../icons/snowy.png') top left/cover no-repeat;
+}
+
+.mist {
+  background: url('../../icons/mist.png') top left/cover no-repeat;
+}

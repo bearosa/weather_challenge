@@ -1,0 +1,25 @@
+.container {
+  	display: flex;
+  	flex-direction: column;
+  	height: 75%;
+  	width: inherit;
+	align-items: center;
+}
+
+.dayContainer {
+	width: 100%;
+	height: 50%;
+	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+	align-items: center;
+}
+
+.forecast {
+	height: 80%;
+	width: inherit;
+	display: flex;
+  	flex-direction: row;
+  	justify-content: center;
+	align-items: center;
+}

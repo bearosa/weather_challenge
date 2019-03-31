@@ -1,9 +1,9 @@
 class ResponseError {
 	constructor() {
-		if(arguments.length == 1) {
+		if(arguments.length === 1) {
 			this.status = 500;
 			this.message = arguments[0];
-		} else if(arguments.length == 2) {
+		} else if(arguments.length === 2) {
 			this.status = arguments[0];
 			this.message = arguments[1];
 		} else {

@@ -1,10 +1,10 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-import Forecast from '../components/Forecast';
-import cities from '../utils/EuropeanCapitals.json';
-import { api } from '../utils/api';
+import Forecast from '../../components/Forecast/Forecast';
+import cities from '../../utils/EuropeanCapitals.json';
+import { api } from '../../utils/api';
 
-import css from '../index.css';
+import css from './WeatherInfo.css'
 
 const getSuggestions = value => {
   	const inputValue = value.trim().toLowerCase();
@@ -30,17 +30,26 @@ export default class WeatherInfo extends React.Component {
     	this.state = {
       		value: '',
       		suggestions: [],
-      		weatherForecast: {}
+      		weatherForecast: []
     	};
   	};
 
 	onChange = (event, { newValue }) => {
 		let city = newValue.trim();
-		let forecast = api.getWeatherInfo(city);
-		this.setState({
-			value: newValue,
-			weatherForecast: forecast
-		});
+		
+		api.getWeatherInfo(city).then(
+			weatherInfo => {
+				this.setState({
+					value: newValue,
+					weatherForecast: weatherInfo.list
+				});
+			},
+			response => {
+				this.setState({
+					value: newValue
+				});
+			}
+		);
 	};
 
 	onSuggestionsFetchRequested = ({ value }) => {
@@ -65,14 +74,14 @@ export default class WeatherInfo extends React.Component {
     	};
 
  		return (
- 			<div>
+ 			<div className='content'>
 				<Autosuggest 	suggestions={suggestions}
 	    						onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
 	    						onSuggestionsClearRequested={this.onSuggestionsClearRequested}
 	    						getSuggestionValue={getSuggestionValue}
 	    						renderSuggestion={renderSuggestion}
 	    						inputProps={inputProps} />
-	    		<Forecast />
+	    		<Forecast forecast={this.state.weatherForecast} />
 	    	</div>
  		);
  	}
