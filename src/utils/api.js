@@ -12,21 +12,21 @@ class ResponseError {
 	}
 }
 
-export const rest = {
+export const api = {
 
 	getSecurityHeader() {
         return {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Accept': 'text/plain',
+            'Content-Type': 'text/plain'
         }
-    }
+    },
 
     async getWeatherInfo(city, days, unit) {
         try {
-            let response = await fetch('api.openweathermap.org/data/2.5/forecast/daily?q=' + city + '&units=' + unit + '&cnt=' + days,
+            let response = await fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=c06276245dc122cefce0103f8cb90a29',
                 {
                     method: 'GET',
-                    headers: rest.getSecurityHeader()
+                    headers: api.getSecurityHeader()
                 });
             let weatherInfo = await response.json();
             return weatherInfo;
