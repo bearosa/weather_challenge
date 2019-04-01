@@ -76,13 +76,13 @@ export default class WeatherInfo extends React.Component {
  		return (
  			<div className='content'>
 				<Autosuggest 	suggestions={suggestions}
-	    						onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-	    						onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-	    						getSuggestionValue={getSuggestionValue}
-	    						renderSuggestion={renderSuggestion}
-	    						inputProps={inputProps} />
-	    		<Forecast forecast={this.state.weatherForecast} />
-	    	</div>
+	    						    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+	    						    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+	    						    getSuggestionValue={getSuggestionValue}
+	    						    renderSuggestion={renderSuggestion}
+	    						    inputProps={inputProps} />
+    		<Forecast forecast={this.state.weatherForecast} />
+    	</div>
  		);
  	}
 }

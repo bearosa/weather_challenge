@@ -14,28 +14,30 @@ export default class Forecast extends React.Component {
     	};
   	};
 
-  	componentWillReceiveProps(props) {
-    	let weatherByDay = [];
-  		props.forecast && props.forecast.forEach(
-  			(weather) => {
-  				let day = weather.dt_txt.split(" ")[0];
+  	componentWillReceiveProps(nextProps) {
+  		if(this.props.forecast != nextProps.forecast) {
+  			let weatherByDay = [];
+	  		nextProps.forecast && nextProps.forecast.forEach(
+	  			(weather) => {
+	  				let day = weather.dt_txt.split(" ")[0];
 
-  				let found = false;
-  				
-  				for(var i = 0; i < weatherByDay.length; i++) {
-  					if (weatherByDay[i].day === day) {
-	  					found = true;
-	  					weatherByDay[i].listHours.push(weather);
-	  					break;
+	  				let found = false;
+	  				
+	  				for(var i = 0; i < weatherByDay.length; i++) {
+	  					if (weatherByDay[i].day === day) {
+		  					found = true;
+		  					weatherByDay[i].listHours.push(weather);
+		  					break;
+		  				}
 	  				}
-  				}
 
-  				if(!found) {
-  					weatherByDay.push({day: day, listHours: [weather]})
-  				}
-  			}
-  		)
-  		this.setState({weatherByDay, selectedDay: weatherByDay[0]});
+	  				if(!found) {
+	  					weatherByDay.push({day: day, listHours: [weather]})
+	  				}
+	  			}
+	  		)
+	  		this.setState({weatherByDay, selectedDay: weatherByDay[0]});
+  		}
   	}
 
   	onChange = (selectedDay) => {
