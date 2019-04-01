@@ -7,6 +7,24 @@
   justify-content: space-around;
 }
 
+.title {
+  padding-top: 2.5%;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #4195f4;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.opening-animation-appear {
+  opacity: 0;
+}
+.opening-animation-appear-active {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+
 .react-autosuggest__container {
   margin-left: auto;
   margin-right: auto;
@@ -23,7 +41,7 @@
   height: 20%;
   font-family: Helvetica, sans-serif;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 1rem;
   border-radius: 0.5rem;
   border: 0;
   padding: 0.5rem;

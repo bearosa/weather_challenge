@@ -1,8 +1,31 @@
 import React from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import HourlyWeather from '../HourlyWeather/HourlyWeather';
 import SelectInput from '../SelectInput/SelectInput';
 
 import css from './Forecast.css';
+
+class WeatherCards extends React.Component {
+	constructor(props) {
+		super(props);		
+		this.state = {};
+	}
+
+	render() {
+		let selectedDay = this.props.selectedDay;
+
+		return (
+			<div className='forecast'>
+		 		{selectedDay.listHours && selectedDay.listHours.map(
+			 			(weather, key) => {
+			 				return <HourlyWeather weather={weather} key={key} />
+			 			}
+			 		) 
+			 	}
+	 		</div>
+		);
+	}
+}
 
 export default class Forecast extends React.Component {
 	constructor(props) {
@@ -15,7 +38,7 @@ export default class Forecast extends React.Component {
   	};
 
   	componentWillReceiveProps(nextProps) {
-  		if(this.props.forecast != nextProps.forecast) {
+  		if(this.props.forecast !== nextProps.forecast) {
   			let weatherByDay = [];
 	  		nextProps.forecast && nextProps.forecast.forEach(
 	  			(weather) => {
@@ -32,7 +55,7 @@ export default class Forecast extends React.Component {
 	  				}
 
 	  				if(!found) {
-	  					weatherByDay.push({day: day, listHours: [weather]})
+	  					weatherByDay.push({id: weather.dt, day: day, listHours: [weather]})
 	  				}
 	  			}
 	  		)
@@ -51,18 +74,33 @@ export default class Forecast extends React.Component {
 
  		return (
  			<div className='container'>
-				{weatherByDay.length > 0 && selectedDay && <SelectInput list={weatherByDay} name='day' value='listHours' valueChange={this.onChange} select={selectedDay.day}/>}
-	 			<div className={'dayContainer'}>
-					<div className='forecast'>
-			 		{ 
-			 			selectedDay && selectedDay.listHours && selectedDay.listHours.map(
-				 			(weather, key) => {
-				 				return <HourlyWeather weather={weather} key={key} />
-				 			}
-				 		) 
-				 	}
-			 		</div>
-				</div> 
+				{weatherByDay.length > 0 && selectedDay && 
+					<CSSTransition 	in
+				        			appear={weatherByDay.length > 0}
+				        			timeout={300}
+				        			classNames="select-animation" >
+						<SelectInput 	list={weatherByDay} 
+										name='day' 
+										value='listHours' 
+										valueChange={this.onChange} 
+										select={selectedDay.day}/>
+					</CSSTransition>
+				}
+	 			{selectedDay && 
+	 				<TransitionGroup className='transitionGroup'>
+		 				<CSSTransition 	appear
+		 								key={selectedDay.id}
+					        			timeout={2000}
+								        onEnter={node => node.offsetHeight}
+								        mountOnEnter
+								        unmountOnExit
+					        			classNames="weather-animation" >
+					        <div className='dayContainer'>
+								<WeatherCards selectedDay={selectedDay} />
+							</div>
+					 	</CSSTransition>
+					</TransitionGroup>
+				} 
 		 	</div>
  		);
  	}

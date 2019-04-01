@@ -1,5 +1,6 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+import { CSSTransition } from 'react-transition-group';
 import Forecast from '../../components/Forecast/Forecast';
 import cities from '../../utils/EuropeanCapitals.json';
 import { api } from '../../utils/api';
@@ -74,15 +75,22 @@ export default class WeatherInfo extends React.Component {
     	};
 
  		return (
- 			<div className='content'>
-				<Autosuggest 	suggestions={suggestions}
-	    						    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-	    						    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-	    						    getSuggestionValue={getSuggestionValue}
-	    						    renderSuggestion={renderSuggestion}
-	    						    inputProps={inputProps} />
-    		<Forecast forecast={this.state.weatherForecast} />
-    	</div>
+      <CSSTransition
+          in
+          appear
+          timeout={1000}
+          classNames="opening-animation">
+     			<div className='content'>
+            <h1 className='title'>Weather</h1>
+    				<Autosuggest 	suggestions={suggestions}
+    	    						    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+    	    						    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+    	    						    getSuggestionValue={getSuggestionValue}
+    	    						    renderSuggestion={renderSuggestion}
+    	    						    inputProps={inputProps} />
+        		<Forecast forecast={this.state.weatherForecast} />
+        	</div>
+      </CSSTransition>
  		);
  	}
 }
